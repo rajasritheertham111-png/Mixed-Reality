@@ -124,6 +124,25 @@
             border: 1px solid #7aa2f7;
         }
 
+        #custom-note-input {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: 1px solid #7aa2f7;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: 400;
+            border-radius: 12px;
+            font-family: inherit;
+            outline: none;
+            transition: border 0.3s;
+            width: 200px;
+            display: block;
+        }
+
+        #custom-note-input:focus {
+            border: 1px solid #bb9af7;
+        }
+
         #status {
             position: absolute;
             top: 20px;
@@ -270,9 +289,10 @@
                     note.setAttribute('geometry', 'primitive: box; width: 0.22; height: 0.22; depth: 0.01');
                     note.setAttribute('material', 'color: #ffd166; roughness: 0.6; metalness: 0.1');
 
+                    const customText = document.getElementById('custom-note-input').value || 'Spatial Note';
                     const textEl = document.createElement('a-entity');
                     textEl.setAttribute('position', '0 0 0.006');
-                    textEl.setAttribute('text', 'value: Spatial Note\\nWrite on Walls!\\n(Pinch to move); width: 0.18; align: center; color: #333333; font: kelsonsans');
+                    textEl.setAttribute('text', `value: ${customText}\\n(Pinch to move); width: 0.18; align: center; color: #333333; font: kelsonsans`);
                     note.appendChild(textEl);
 
                     note.setAttribute('position', pos);
@@ -417,6 +437,7 @@
 
     <!-- 3. Bottom AR Mode Selector -->
     <div id="ui-overlay">
+        <input type="text" id="custom-note-input" placeholder="Type custom note..." autocomplete="off" />
         <button id="btn-notes" class="mode-btn active" onclick="setMode('notes')">Sticky Notes (Walls)</button>
         <button id="btn-furniture" class="mode-btn" onclick="setMode('furniture')">Physics Jenga (Floors)</button>
     </div>
